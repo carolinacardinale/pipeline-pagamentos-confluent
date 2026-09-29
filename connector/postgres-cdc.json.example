@@ -1,0 +1,18 @@
+{
+  "connector.class": "PostgresCdcSourceV2",
+  "name": "payments-postgres-cdc",
+  "kafka.auth.mode": "SERVICE_ACCOUNT",
+  "kafka.service.account.id": "sa-xxxxx",
+  "database.hostname": "SEU_HOST_POSTGRES_ACESSIVEL_PELO_CONFLUENT_CLOUD",
+  "database.port": "5432",
+  "database.user": "postgres",
+  "database.password": "NAO_VERSIONE_A_SENHA_REAL",
+  "database.dbname": "payments",
+  "topic.prefix": "payments",
+  "slot.name": "dbz_payments_slot",
+  "publication.name": "dbz_publication",
+  "publication.autocreate.mode": "disabled",
+  "table.include.list": "public.contas,public.transacoes",
+  "output.data.format": "AVRO",
+  "tasks.max": "1"
+}
