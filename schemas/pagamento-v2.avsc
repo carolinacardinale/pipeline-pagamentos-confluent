@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "name": "Pagamento",
+  "namespace": "br.com.geoexplorer.payments",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "cartao", "type": "string"},
+    {"name": "valor", "type": "double"},
+    {"name": "estabelecimento", "type": "string"},
+    {"name": "data_hora", "type": "string"},
+    {"name": "cidade", "type": ["null", "string"], "default": null}
+  ]
+}
