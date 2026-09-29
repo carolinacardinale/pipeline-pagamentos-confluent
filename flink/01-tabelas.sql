@@ -7,7 +7,7 @@
 -- Quando os tópicos usam Schema Registry, o Flink pode inferir as tabelas.
 -- Confirme os nomes no Workspace antes de executar as consultas abaixo.
 
--- Tabelas de saída criadas pelo próprio Flink.
+-- Saída do enriquecimento. O modo retract aceita alterações vindas do CDC.
 CREATE TABLE IF NOT EXISTS transacoes_enriquecidas (
   transacao_id BIGINT,
   conta_id BIGINT,
@@ -18,18 +18,17 @@ CREATE TABLE IF NOT EXISTS transacoes_enriquecidas (
   cidade STRING,
   status_conta STRING,
   evento_em TIMESTAMP_LTZ(3)
+) WITH (
+  'changelog.mode' = 'retract'
 );
 
+-- Saída agregada da regra de fraude.
 CREATE TABLE IF NOT EXISTS alertas_fraude (
-  transacao_id BIGINT,
-  conta_id BIGINT,
-  nome STRING,
   cartao STRING,
-  valor DECIMAL(12,2),
-  estabelecimento STRING,
-  cidade STRING,
-  evento_em TIMESTAMP_LTZ(3),
+  janela_inicio TIMESTAMP_LTZ(3),
+  janela_fim TIMESTAMP_LTZ(3),
   transacoes_60s BIGINT,
+  valor_total DECIMAL(18,2),
   regra STRING
 );
 
